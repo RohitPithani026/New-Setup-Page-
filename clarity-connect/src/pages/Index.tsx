@@ -8,6 +8,7 @@ import { Sparkles, Target, Play, Bell } from 'lucide-react';
 
 const Index = () => {
   const [activeTeam, setActiveTeam] = useState<string | null>(null);
+  const [expandedModuleId, setExpandedModuleId] = useState<string | null>(null);
 
   const allTeams = useMemo(() => {
     const teams = new Set<string>();
@@ -21,6 +22,10 @@ const Index = () => {
   }, [activeTeam]);
 
   const hasBlockedModules = setupModules.some(m => m.status === 'blocked');
+
+  const handleModuleToggle = (moduleId: string) => {
+    setExpandedModuleId(expandedModuleId === moduleId ? null : moduleId);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -75,22 +80,14 @@ const Index = () => {
           <OverviewCards modules={setupModules} />
         </div>
 
-        {/* Controls - Just filter tabs now, no view toggle */}
-        <div className="mb-6">
+        {/* Controls - Filter and Demo Button */}
+        <div className="mb-6 flex items-center justify-between gap-4">
           <FilterTabs 
             teams={allTeams} 
             activeTeam={activeTeam} 
             onTeamChange={setActiveTeam} 
           />
-        </div>
-
-        {/* Demo Banner */}
-        <div className="rounded-lg border border-primary/20 bg-primary/5 px-5 py-3 mb-6 flex items-center justify-between">
-          <p className="text-sm">
-            <span className="font-medium text-primary">Want to skip setup and see how ThriveStack works?</span>
-            {' '}Try our demo mode with sample data.
-          </p>
-          <Button variant="outline" size="sm" className="flex-shrink-0">
+          <Button variant="outline" size="sm">
             <Play className="h-4 w-4 mr-2" />
             Skip setup, try demo mode
           </Button>
@@ -102,6 +99,8 @@ const Index = () => {
             <ModuleCard 
               key={module.id} 
               module={module}
+              isExpanded={expandedModuleId === module.id}
+              onToggle={() => handleModuleToggle(module.id)}
             />
           ))}
         </div>

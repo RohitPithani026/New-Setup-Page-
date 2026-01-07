@@ -10,11 +10,11 @@ interface FilterTabsProps {
 export function FilterTabs({ teams, activeTeam, onTeamChange }: FilterTabsProps) {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span className="text-sm font-medium text-muted-foreground mr-2">Filter by Team</span>
+      <span className="text-sm font-medium text-muted-foreground mr-1">Filter by Team</span>
       <button
         onClick={() => onTeamChange(null)}
         className={cn(
-          'flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-all',
+          'flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium transition-all',
           activeTeam === null 
             ? 'bg-primary text-primary-foreground' 
             : 'bg-secondary text-muted-foreground hover:text-foreground'
@@ -27,13 +27,13 @@ export function FilterTabs({ teams, activeTeam, onTeamChange }: FilterTabsProps)
           key={team}
           onClick={() => onTeamChange(activeTeam === team ? null : team)}
           className={cn(
-            'flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-all',
+            'flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium transition-all',
             activeTeam === team 
               ? 'bg-primary text-primary-foreground' 
               : 'bg-secondary text-muted-foreground hover:text-foreground'
           )}
         >
-          <Users className="h-3.5 w-3.5" />
+          <Users className="h-3 w-3" />
           {team}
         </button>
       ))}

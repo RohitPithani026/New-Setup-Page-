@@ -13,7 +13,7 @@ import {
   AlertTriangle, ListChecks, Activity
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 
 const iconMap: Record<string, typeof Target> = {
   target: Target,
@@ -24,10 +24,11 @@ const iconMap: Record<string, typeof Target> = {
 
 interface ModuleCardProps {
   module: SetupModule;
+  isExpanded?: boolean;
+  onToggle?: () => void;
 }
 
-export function ModuleCard({ module }: ModuleCardProps) {
-  const [isExpanded, setIsExpanded] = useState(module.status === 'blocked' || module.status === 'in-progress');
+export function ModuleCard({ module, isExpanded = false, onToggle }: ModuleCardProps) {
   const Icon = iconMap[module.icon] || Target;
   
   const blockers = useMemo(() => 
@@ -52,7 +53,7 @@ export function ModuleCard({ module }: ModuleCardProps) {
       {/* Header - Always visible */}
       <div 
         className="flex items-start gap-4 p-5 cursor-pointer hover:bg-secondary/30 transition-colors"
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={onToggle}
       >
         <div className={cn(
           'flex h-12 w-12 items-center justify-center rounded-xl flex-shrink-0',
