@@ -127,16 +127,16 @@ export function ModuleCard({ module }: ModuleCardProps) {
           {/* Tabs for Setup Steps, Blockers, Activity */}
           <div className="px-5 pt-5">
             <Tabs defaultValue={hasBlocker ? 'blockers' : 'steps'} className="w-full">
-              <TabsList className="mb-4">
+              <TabsList className="mb-6">
                 <TabsTrigger value="steps" className="gap-2">
                   <ListChecks className="h-4 w-4" />
                   Setup Steps
                 </TabsTrigger>
-                <TabsTrigger value="blockers" className="gap-2">
+                <TabsTrigger value="blockers" className="gap-2 relative">
                   <AlertTriangle className="h-4 w-4" />
                   Blockers
                   {hasBlocker && (
-                    <span className="ml-1 flex h-5 w-5 items-center justify-center rounded-full bg-blocker text-blocker-foreground text-xs font-medium">
+                    <span className="ml-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-blocker text-blocker-foreground text-xs font-semibold shadow-sm">
                       {blockers.length}
                     </span>
                   )}
