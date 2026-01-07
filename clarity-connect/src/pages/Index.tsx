@@ -76,7 +76,7 @@ const Index = () => {
         </div>
 
         {/* Overview Stats */}
-        <div className="mb-8">
+        <div className="mb-6">
           <OverviewCards modules={setupModules} />
         </div>
 
